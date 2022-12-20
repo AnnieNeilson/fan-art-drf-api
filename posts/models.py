@@ -9,12 +9,13 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', 
+        upload_to='images/',
         default='../ApiProjectAssets/default_post_image_qgc0xv.jpg',
         blank=True
     )
 
     class Meta:
         ordering = ['-created_at']
+
     def __str__(self):
         return f'{self.id} {self.title}'

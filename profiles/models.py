@@ -10,7 +10,8 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../ApiProjectAssets/default_profile_wojr3s'
+        upload_to='images/',
+        default='../ApiProjectAssets/default_profile_wojr3s'
     )
 
     class Meta:

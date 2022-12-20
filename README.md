@@ -11,8 +11,14 @@ This repository is the backend of the application using the Django REST Framewor
 
 ## Contents
 - [Database Schema](#database-schema)
-- [Testing](#testing)
 - [Technologies Used](#technologies-used)
+    * [Languages](#languages)
+    * [Frameworks, Libraries and Programs](#frameworks-libraries-and-programs)
+- [Testing](#testing)
+    * [Validator Testing](#validator-testing)
+    * [Manual Testing](#manual-testing)
+        * [Testing User Stories](#testing-user-stories)
+        * [Url Path Testing](#url-path-testing)
 - [Deployment](#deployment)
 - [Credits](#credits)
   
@@ -21,27 +27,13 @@ I created this Entity relationship diagram to help visualise the backend of this
 
 ![Entity relationship diagram](./images/EntityRelatonshipDiagram.PNG)
 
-## Testing
-
-### Manual Testing
-Testing User Stories
-
-1. Admin Profiles List: As an admin, I would like to be able to view all profiles so that I can moderate them for inappropriate content.
-* I visited the [admin site](https://fan-art-drf-api.herokuapp.com/admin/) and logged in with the admin credentials. From there I followed the link to Profiles, I'm presented with a list of profiles. I can visit any profile and see the details of their profile
-
-2. User Sign In: As a web server I would like to be able to authenticate user credentials so that users can sign in and use the site.
-* 
-
-### Validator Testing
-
-
 ## Technologies Used
 
 ### Languages
 * Python  
 -- The Django REST Framework base language
 
-### Frameworks, libraries, and Programs
+### Frameworks, Libraries and Programs
 * Cloudinary
 -- storage of images
 * Pillow  
@@ -57,6 +49,28 @@ Testing User Stories
 * Django Rest Auth
 * PostgreSQL
 * Cors headers
+
+
+## Testing
+
+### Validator Testing
+
+I ran the files from this project through an online PEP8 validator and recorded the results in the following table:
+![PEP8 Validator results](./images/pep8-validator-testing.PNG)
+
+### Manual Testing
+#### Testing User Stories
+
+1. Admin Profiles List: As an admin, I would like to be able to view all profiles so that I can moderate them for inappropriate content.
+* I visited the [admin site](https://fan-art-drf-api.herokuapp.com/admin/) and logged in with the admin credentials. From there I followed the link to Profiles, I'm presented with a list of profiles. I can visit any profile and see the details of their profile
+
+2. User Sign In: As a web server I would like to be able to authenticate user credentials so that users can sign in and use the site.
+* 
+
+#### Url Path Testing
+
+I tested all the url paths and recorded the results in the following table:
+![url path results](./images/urlpathchecks.PNG)
 
 ## Deployment
 

@@ -34,7 +34,7 @@ I created this Entity relationship diagram to help visualise the backend of this
 -- The Django REST Framework base language
 
 ### Frameworks, Libraries and Programs
-* Cloudinary
+* Cloudinary  
 -- storage of images
 * Pillow  
 -- image processing capabilities
@@ -55,7 +55,7 @@ I created this Entity relationship diagram to help visualise the backend of this
 
 ### Validator Testing
 
-I ran the files from this project through an online PEP8 validator and recorded the results in the following table:
+I ran the files from this project through an online PEP8 validator and recorded the results in the following table:  
 ![PEP8 Validator results](./images/pep8-validator-testing.PNG)
 
 ### Manual Testing
@@ -120,17 +120,60 @@ I ran the files from this project through an online PEP8 validator and recorded 
 
 #### Url Path Testing
 
-I tested all the url paths and recorded the results in the following table:
+I tested all the url paths and recorded the results in the following table:  
 ![url path results](./images/urlpathchecks.PNG)
 
 ## Deployment
 
-## Prepare API for deployment to Heroku
+1. Log in to Heroku and create a new app  
+2. Click on the settings tab, Add a config var called DATABASE_URL and add the database as the value  
+3. Back in the workspace, in the terminal, install dj_database_url and psycopg2  
+4. In settings.py file, import dj_database_url underneath the import for os  
+5. Update the DATABASES section to the following:  
+```
+ if 'DEV' in os.environ:
+     DATABASES = {
+         'default': {
+             'ENGINE': 'django.db.backends.sqlite3',
+             'NAME': BASE_DIR / 'db.sqlite3',
+         }
+     }
+ else:
+     DATABASES = {
+         'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+     }
+```
+6. In the env.py file, add a new environment variable with the key set to DATABASE_URL, and the value to the database URL
+7. Temporarily comment out the DEV environment variable
+8. In the terminal, -–dry-run makemigrations to confirm the connection to the external database
+9. Migrate the database models to the new database
+10. Create a superuser for the new database, follow the steps to set the username and password  
+11. Confirm the database is connected
+12. In the terminal install gunicorn
+13. Update the requirements file with terminal command pip freeze > requirements.txt
+14. Create a Procfile and add the following commands:
+```
+ release: python manage.py makemigrations && python manage.py migrate
+ web: gunicorn drf_api.wsgi
+```
+15. In settings.py update the ALLOWED_HOSTS variable to include the heroku app url
+16. Add corsheaders to INSTALLED_APPS, and corsheaders middleware to MIDDLEWARE, ensuring it is at the top
+17. Under the MIDDLEWARE list, set the ALLOWED_ORIGINS for the network requests made to the server.
+18. Enable sending cookies in cross-origin requests
+19. To be able to have the front end app and the API deployed to different platforms, set the JWT_AUTH_SAMESITE attribute to 'None'
+20. Remove the value for SECRET_KEY and replace with "os.getenv('SECRET_KEY')" to use an environment variable instead
+21. Set a NEW value for your SECRET_KEY environment variable in env.py
+22. Set the DEBUG variable to "'DEV' in os.environ"
+23. Comment DEV back into env.py (undoing what I did in step 7)
+24. Ensure the requirements are up to date with terminal command pip freeze --local > requirements.txt
+25. Add, commit and push code to GitHub
 
-## Deployment to Heroku
+Back in Heroku
+26. Open the settings tab and add two more config vars, SECRET_KEY and CLOUDINARY_URL
+27. Open the Deploy tab and connect to GitHub, select the correct repository
+28. Select Manual Deploy and click Depoly Branch, once the build process is complete the app will be ready to open and use.
 
 ## Credits
 
-I referenced [this README.md file](https://github.com/Mrst12/pp5-backend-drf-appy-families/blob/main/README.md) for help with the structure and layout of this README.md file.
-
-## Acknowledgements
+* The Code Institute Django REST Framework walk through was used as a guide to this project.
+* I referenced [this README.md file](https://github.com/Mrst12/pp5-backend-drf-appy-families/blob/main/README.md) by Lisa Tinmurth for help with the structure and layout of this README.md file.
